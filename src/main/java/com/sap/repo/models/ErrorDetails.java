@@ -1,4 +1,4 @@
-package com.sap.scholar.models;
+package com.sap.repo.models;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -6,12 +6,12 @@ import lombok.Setter;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import java.util.ArrayList;
+
 
 @Entity
 @Setter
 @Getter
-public class Scholar {
+public class ErrorDetails {
     @Id
     @Column
     private String id;

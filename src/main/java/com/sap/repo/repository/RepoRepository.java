@@ -1,11 +1,11 @@
-package com.sap.scholar.repository;
+package com.sap.repo.repository;
 
-import com.sap.scholar.models.Scholar;
+import com.sap.repo.models.ErrorDetails;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
 @Repository
-public interface ScholarRepository extends JpaRepository<Scholar, String> {
+public interface RepoRepository extends JpaRepository<ErrorDetails, String> {
 }
