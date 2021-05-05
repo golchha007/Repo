@@ -11,24 +11,24 @@ public class RepoService {
 
     RepoRepository repoRepository;
 
-    RepoService(RepoRepository repoRepository){
+    RepoService(RepoRepository repoRepository) {
         this.repoRepository = repoRepository;
     }
 
 
-    public List<ErrorDetails> getErrors(){
+    public List<ErrorDetails> getErrors() {
         return this.repoRepository.findAll();
     }
 
-//    public Scholar getScholar(String keyword){
-//        return this.scholarRepository.findBySolution(keyword).orElse(null);
+//    public ErrorDetails getError(String keyword){
+//        return this.repoRepository.findBySolution(keyword).orElse(null);
 //    }
 
-    public ErrorDetails createError(ErrorDetails errorDetails){
+    public ErrorDetails createError(ErrorDetails errorDetails) {
         return this.repoRepository.save(errorDetails);
     }
 
-    public void deleteError(String id){
+    public void deleteError(String id) {
         this.repoRepository.deleteById(id);
     }
 }

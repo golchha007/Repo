@@ -8,7 +8,9 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
+@RequestMapping("/errors/")
 public class RepoController {
+
     private RepoService repoService;
 
     RepoController(RepoService repoService) {
@@ -19,11 +21,6 @@ public class RepoController {
     public List<ErrorDetails> getErrors() {
         return this.repoService.getErrors();
     }
-
-//    @GetMapping("/scholar/{id}")
-//    public Scholar getScholar(@PathVariable("id") String id){
-//        return this.scholarService.getScholar(id);
-//    }
 
     @PostMapping("/error")
     public ErrorDetails createError(@RequestBody ErrorDetails errorDetails) {
