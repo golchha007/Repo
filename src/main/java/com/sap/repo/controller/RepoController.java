@@ -11,7 +11,7 @@ import java.util.UUID;
 @RequestMapping("/errors/")
 public class RepoController {
 
-    private RepoService repoService;
+    private final RepoService repoService;
 
     RepoController(RepoService repoService) {
         this.repoService = repoService;

@@ -9,7 +9,7 @@ import java.util.List;
 @Service
 public class RepoService {
 
-    RepoRepository repoRepository;
+    private final RepoRepository repoRepository;
 
     RepoService(RepoRepository repoRepository) {
         this.repoRepository = repoRepository;
