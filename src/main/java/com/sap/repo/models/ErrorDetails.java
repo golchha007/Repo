@@ -30,4 +30,7 @@ public class ErrorDetails {
     @Column
     private String authorId;
 
+    @Column
+    private String Description;
+
 }
