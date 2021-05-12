@@ -2,7 +2,6 @@ package com.sap.repo.services;
 
 import com.sap.repo.models.ErrorDetails;
 import com.sap.repo.repository.RepoRepository;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

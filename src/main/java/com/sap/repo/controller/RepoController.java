@@ -28,7 +28,7 @@ public class RepoController {
             return ResponseEntity.noContent().build();
 
         else
-            return ResponseEntity.ok(errors);
+            return ResponseEntity.ok(errors);                                   //200
 
     }
 
@@ -41,9 +41,9 @@ public class RepoController {
         ErrorDetails error = this.repoService.createError(errorDetails);
 
         if(error==null)
-            return ResponseEntity.noContent().build();
+            return ResponseEntity.noContent().build();                          //204
         else
-            return ResponseEntity.status(HttpStatus.CREATED).body(error);
+            return ResponseEntity.status(HttpStatus.CREATED).body(error);       //201
 
     }
 
