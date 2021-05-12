@@ -2,6 +2,7 @@ package com.sap.repo.controller;
 
 import com.sap.repo.models.ErrorDetails;
 import com.sap.repo.services.RepoService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -42,7 +43,7 @@ public class RepoController {
         if(error==null)
             return ResponseEntity.noContent().build();
         else
-            return ResponseEntity.ok(error);
+            return ResponseEntity.status(HttpStatus.CREATED).body(error);
 
     }
 
