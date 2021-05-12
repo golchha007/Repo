@@ -31,4 +31,8 @@ public class RepoService {
     public void deleteError(String id) {
         this.repoRepository.deleteById(id);
     }
+
+    public List<ErrorDetails> getAllAuthorErrors(String authorId) {
+        return this.repoRepository.findByAuthorId(authorId);
+    }
 }

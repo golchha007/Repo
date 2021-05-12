@@ -1,5 +1,7 @@
 package com.sap.repo.models;
 
+import javax.persistence.Entity;
+
 public class UserDetails {
 
     private String fullname;

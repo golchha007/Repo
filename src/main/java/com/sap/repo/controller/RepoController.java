@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
+@CrossOrigin(origins = "*")
 @RequestMapping("/errors/")
 public class RepoController {
 
@@ -33,6 +34,11 @@ public class RepoController {
     public void deleteError(@PathVariable("id") String id) {
         this.repoService.deleteError(id);
         System.out.println("deleted");
+    }
+
+    @GetMapping("/error/{authorId}")
+    public List<ErrorDetails> getAllAuthorErrors(@PathVariable("authorId") String authorId) {
+        return this.repoService.getAllAuthorErrors(authorId);
     }
 
 }
