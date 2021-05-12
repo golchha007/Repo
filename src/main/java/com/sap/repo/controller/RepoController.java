@@ -2,6 +2,7 @@ package com.sap.repo.controller;
 
 import com.sap.repo.models.ErrorDetails;
 import com.sap.repo.services.RepoService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,26 +20,51 @@ public class RepoController {
     }
 
     @GetMapping("/error")
-    public List<ErrorDetails> getErrors() {
-        return this.repoService.getErrors();
+    public ResponseEntity<List<ErrorDetails>> getErrors() {
+
+        List<ErrorDetails> errors = this.repoService.getErrors();
+        if(errors==null)
+            return ResponseEntity.noContent().build();
+
+        else
+            return ResponseEntity.ok(errors);
+
     }
 
     @PostMapping("/error")
-    public ErrorDetails createError(@RequestBody ErrorDetails errorDetails) {
+    public ResponseEntity<ErrorDetails> createError(@RequestBody ErrorDetails errorDetails) {
+
         String guid = UUID.randomUUID().toString().replace("-", "");
         errorDetails.setId(guid);
-        return this.repoService.createError(errorDetails);
+
+        ErrorDetails error = this.repoService.createError(errorDetails);
+
+        if(error==null)
+            return ResponseEntity.noContent().build();
+        else
+            return ResponseEntity.ok(error);
+
     }
 
     @DeleteMapping("/error/{id}")
-    public void deleteError(@PathVariable("id") String id) {
-        this.repoService.deleteError(id);
-        System.out.println("deleted");
+    public ResponseEntity deleteError(@PathVariable("id") String id) {
+
+        Boolean value = this.repoService.deleteError(id);
+
+        if(value)
+            return  ResponseEntity.ok().build();
+        else
+            return ResponseEntity.noContent().build();
     }
 
     @GetMapping("/error/{authorId}")
-    public List<ErrorDetails> getAllAuthorErrors(@PathVariable("authorId") String authorId) {
-        return this.repoService.getAllAuthorErrors(authorId);
+    public ResponseEntity<List<ErrorDetails>> getAllAuthorErrors(@PathVariable("authorId") String authorId) {
+
+        List<ErrorDetails> errors = this.repoService.getAllAuthorErrors(authorId);
+        if(errors==null)
+            return ResponseEntity.noContent().build();
+        else
+            return ResponseEntity.ok(errors);
     }
 
 }
