@@ -1,9 +1,11 @@
 package com.sap.repo.models;
 
+import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.validation.annotation.Validated;
 
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;

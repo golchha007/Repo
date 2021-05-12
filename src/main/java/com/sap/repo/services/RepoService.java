@@ -2,6 +2,7 @@ package com.sap.repo.services;
 
 import com.sap.repo.models.ErrorDetails;
 import com.sap.repo.repository.RepoRepository;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,24 +16,52 @@ public class RepoService {
         this.repoRepository = repoRepository;
     }
 
-
     public List<ErrorDetails> getErrors() {
-        return this.repoRepository.findAll();
-    }
+        try
+        {
+            return this.repoRepository.findAll();
+        }
+        catch (Exception e)
+        {
+            return null;
+        }
 
-//    public ErrorDetails getError(String keyword){
-//        return this.repoRepository.findBySolution(keyword).orElse(null);
-//    }
+    }
 
     public ErrorDetails createError(ErrorDetails errorDetails) {
-        return this.repoRepository.save(errorDetails);
+        try
+        {
+            this.repoRepository.save(errorDetails);
+            return errorDetails;
+        }
+        catch(Exception e)
+        {
+            return null;
+        }
+
     }
 
-    public void deleteError(String id) {
-        this.repoRepository.deleteById(id);
+    public Boolean deleteError(String id) {
+        try
+        {
+            this.repoRepository.deleteById(id);
+            return true;
+        }
+        catch (Exception e)
+        {
+            return false;
+        }
     }
 
     public List<ErrorDetails> getAllAuthorErrors(String authorId) {
-        return this.repoRepository.findByAuthorId(authorId);
+        try
+        {
+            return this.repoRepository.findByAuthorId(authorId);
+        }
+        catch (Exception e)
+        {
+            return null;
+        }
+
     }
 }
