@@ -3,6 +3,3 @@ applications:
   path: target/repo-0.0.1-SNAPSHOT.jar
   buildpack: sap_java_buildpack
   memory: 1024M
-  
-- name: CF CLI Action
-  uses: citizen-of-planet-earth/cf-cli-action@v2
