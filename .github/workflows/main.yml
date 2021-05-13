@@ -7,7 +7,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-18.04
-
+    
     steps:
       - uses: citizen-of-planet-earth/cf-cli-action@master
         with:
@@ -16,4 +16,4 @@ jobs:
           cf_password: ${{ secrets.CF_PASSWORD }}
           cf_org: ${{ secrets.CF_ORG }}
           cf_space: ${{ secrets.CF_SPACE }}
-          command: push repo
+          command: push myproject
