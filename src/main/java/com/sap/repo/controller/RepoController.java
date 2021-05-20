@@ -68,4 +68,10 @@ public class RepoController {
             return ResponseEntity.ok(errors);
     }
 
+    @PutMapping("/error/update")
+    public ResponseEntity<ErrorDetails> updateErrorDetails(@RequestBody ErrorDetails errorDetails){
+        ErrorDetails errorDetails1 = this.repoService.updateErrorDetails(errorDetails);
+        return ResponseEntity.ok(errorDetails1);
+    }
+
 }

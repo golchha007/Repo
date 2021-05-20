@@ -5,6 +5,7 @@ import com.sap.repo.repository.RepoRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class RepoService {
@@ -61,6 +62,24 @@ public class RepoService {
         {
             return null;
         }
+    }
 
+    public ErrorDetails updateErrorDetails(ErrorDetails errorDetails)
+    {
+        try
+        {
+            ErrorDetails errorDetails1 = repoRepository.getOne(errorDetails.getId());
+            errorDetails1.setSolution(errorDetails.getSolution());
+            errorDetails1.setKeywords(errorDetails.getKeywords());
+            errorDetails1.setDescription(errorDetails.getDescription());
+            errorDetails1.setType(errorDetails.getType());
+
+            this.repoRepository.save(errorDetails);
+            return errorDetails;
+        }
+        catch (Exception e)
+        {
+            return null;
+        }
     }
 }
