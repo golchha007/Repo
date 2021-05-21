@@ -31,7 +31,7 @@ public class RepoController {
             return ResponseEntity.noContent().build();
 
         else
-            return ResponseEntity.ok(errors);                                   //200
+            return ResponseEntity.ok(errors);
 
     }
 
@@ -45,15 +45,15 @@ public class RepoController {
         ErrorDetails error = this.repoService.createError(errorDetails);
 
         if (error == null)
-            return ResponseEntity.noContent().build();                          //204
+            return ResponseEntity.noContent().build();
         else
-            return ResponseEntity.status(HttpStatus.CREATED).body(error);       //201
+            return ResponseEntity.status(HttpStatus.CREATED).body(error);
 
     }
 
     @DeleteMapping("/error/{id}")
     @ApiOperation(value = "Deletes the error on the basis of id passed", notes = "Provide a proper ErrorDetails Id to be deleted as path variable")
-    public ResponseEntity deleteError(@ApiParam(value = "Id value of the ErrorDetails you need to delete", required = false)
+    public ResponseEntity deleteError(@ApiParam(value = "Id value of the ErrorDetails you need to delete", required = true)
             @PathVariable("id") String id) {
 
         Boolean value = this.repoService.deleteError(id);
@@ -81,5 +81,27 @@ public class RepoController {
         ErrorDetails errorDetails1 = this.repoService.updateErrorDetails(errorDetails);
         return ResponseEntity.ok(errorDetails1);
     }
+
+    @PostMapping("/error/data")
+    @ApiOperation(value = "Just to put initial data for ErrorDetails")
+    public ResponseEntity<List<ErrorDetails>> initialData(@RequestBody List<ErrorDetails> errorDetails)
+    {
+
+        for(int i=0;i<errorDetails.size();i++)
+        {
+            String guid = UUID.randomUUID().toString().replace("-", "");
+            errorDetails.get(i).setId(guid);
+        }
+
+
+        List<ErrorDetails> errorDetailsList = this.repoService.createInitialErrors(errorDetails);
+
+        if (errorDetailsList == null)
+            return ResponseEntity.noContent().build();
+        else
+            return ResponseEntity.status(HttpStatus.CREATED).body(errorDetailsList);
+    }
+
+
 
 }
