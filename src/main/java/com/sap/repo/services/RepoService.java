@@ -82,4 +82,16 @@ public class RepoService {
             return null;
         }
     }
+
+    public List<ErrorDetails> createInitialErrors(List<ErrorDetails> errorDetails) {
+        try
+        {
+            return this.repoRepository.saveAll(errorDetails);
+        }
+        catch (Exception e)
+        {
+            return null;
+        }
+
+    }
 }
