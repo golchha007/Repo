@@ -2,6 +2,8 @@ package com.sap.repo.controller;
 
 import com.sap.repo.models.ErrorDetails;
 import com.sap.repo.services.RepoService;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -11,7 +13,7 @@ import java.util.UUID;
 
 @RestController
 @CrossOrigin(origins = "*")
-@RequestMapping("/errors/")
+@RequestMapping("/api")
 public class RepoController {
 
     private final RepoService repoService;
@@ -21,10 +23,11 @@ public class RepoController {
     }
 
     @GetMapping("/error")
+    @ApiOperation(value = "Gets all the errors", notes = "No need to pass any payload or path variable")
     public ResponseEntity<List<ErrorDetails>> getErrors() {
 
         List<ErrorDetails> errors = this.repoService.getErrors();
-        if(errors==null)
+        if (errors == null)
             return ResponseEntity.noContent().build();
 
         else
@@ -33,6 +36,7 @@ public class RepoController {
     }
 
     @PostMapping("/error")
+    @ApiOperation(value = "Post the error", notes = "Pass the ErrorDetails as payload")
     public ResponseEntity<ErrorDetails> createError(@RequestBody ErrorDetails errorDetails) {
 
         String guid = UUID.randomUUID().toString().replace("-", "");
@@ -40,7 +44,7 @@ public class RepoController {
 
         ErrorDetails error = this.repoService.createError(errorDetails);
 
-        if(error==null)
+        if (error == null)
             return ResponseEntity.noContent().build();                          //204
         else
             return ResponseEntity.status(HttpStatus.CREATED).body(error);       //201
@@ -48,28 +52,32 @@ public class RepoController {
     }
 
     @DeleteMapping("/error/{id}")
-    public ResponseEntity deleteError(@PathVariable("id") String id) {
+    @ApiOperation(value = "Deletes the error on the basis of id passed", notes = "Provide a proper ErrorDetails Id to be deleted as path variable")
+    public ResponseEntity deleteError(@ApiParam(value = "Id value of the ErrorDetails you need to delete", required = false)
+            @PathVariable("id") String id) {
 
         Boolean value = this.repoService.deleteError(id);
 
-        if(value)
-            return  ResponseEntity.ok().build();
+        if (value)
+            return ResponseEntity.ok().build();
         else
             return ResponseEntity.noContent().build();
     }
 
     @GetMapping("/error/{authorId}")
+    @ApiOperation(value = "Gets all the errors for an authorId", notes = "Do pass authorId as path variable")
     public ResponseEntity<List<ErrorDetails>> getAllAuthorErrors(@PathVariable("authorId") String authorId) {
 
         List<ErrorDetails> errors = this.repoService.getAllAuthorErrors(authorId);
-        if(errors==null)
+        if (errors == null)
             return ResponseEntity.noContent().build();
         else
             return ResponseEntity.ok(errors);
     }
 
     @PutMapping("/error/update")
-    public ResponseEntity<ErrorDetails> updateErrorDetails(@RequestBody ErrorDetails errorDetails){
+    @ApiOperation(value = "Updates the existing ErrorDetail", notes = "Do pass the updated ErrorDetails as paylaod")
+    public ResponseEntity<ErrorDetails> updateErrorDetails(@RequestBody ErrorDetails errorDetails) {
         ErrorDetails errorDetails1 = this.repoService.updateErrorDetails(errorDetails);
         return ResponseEntity.ok(errorDetails1);
     }
