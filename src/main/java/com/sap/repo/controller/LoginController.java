@@ -8,7 +8,7 @@ import java.util.List;
 
 @RestController
 @CrossOrigin(origins = "*")
-@RequestMapping("/logins/")
+@RequestMapping("/api")
 public class LoginController {
 
     private final LoginService loginService;
